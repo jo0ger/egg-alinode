@@ -1,72 +1,47 @@
-# egg-alinode
+# egg-alinode-async
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
-[![Test coverage][codecov-image]][codecov-url]
-[![David deps][david-image]][david-url]
-[![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/egg-alinode.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/egg-alinode
-[travis-image]: https://img.shields.io/travis/eggjs/egg-alinode.svg?style=flat-square
-[travis-url]: https://travis-ci.org/eggjs/egg-alinode
-[codecov-image]: https://codecov.io/github/eggjs/egg-alinode/coverage.svg?branch=master
-[codecov-url]: https://codecov.io/github/eggjs/egg-alinode?branch=master
-[david-image]: https://img.shields.io/david/eggjs/egg-alinode.svg?style=flat-square
-[david-url]: https://david-dm.org/eggjs/egg-alinode
-[snyk-image]: https://snyk.io/test/npm/egg-alinode/badge.svg?style=flat-square
-[snyk-url]: https://snyk.io/test/npm/egg-alinode
-[download-image]: https://img.shields.io/npm/dm/egg-alinode.svg?style=flat-square
-[download-url]: https://npmjs.org/package/egg-alinode
+[npm-image]: https://img.shields.io/npm/v/egg-alinode-async.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/egg-alinode-async
+[download-image]: https://img.shields.io/npm/dm/egg-alinode-async.svg?style=flat-square
+[download-url]: https://npmjs.org/package/egg-alinode-async
 
-alinode plugin for egg.
+> fork自egg-alinode，文档请看[README](https://github.com/eggjs/egg-alinode/blob/master/README.md)
+
+主要是针对开启alinode之前需要从服务器或者数据库等远端获取`appid`和`secret`，可以“异步”启动alinode
 
 ## Install
 
-```bash
-$ npm i egg-alinode
+``` bash
+$ npm i egg-alinode-async
 ```
 
 ## Usage
 
-Enable this plugin
+使用方法和`egg-alinode`一模一样，除了初始配置和启动方式不同
 
-```js
+1. 开启插件
+
+``` js
 // config/plugin.js
 exports.alinode = {
   enable: true,
-  package: 'egg-alinode',
-};
+  package: 'egg-alinode-async'
+}
 ```
 
-Add `appid` and `secret` from https://node.console.aliyun.com/
+2. 设置配置项
 
-```js
-// config/config.default.js
-exports.alinode = {
-  enable: true,
-  appid: 'my app id',
-  secret: 'my app secret',
-};
+这一步可省略，无需配置`appid`和`secret`，因为我们是异步获取这俩的
+
+3. 通知agent启动alinode
+
+``` js
+// app.js 在获取配置后
+app.messenger.sendToAgent('alinode', {
+  appid: 'remote appid',
+  secret: 'remote secret'
+})
 ```
-
-Start dispatch.js with `NODE_LOG_DIR={logdir}` and `ENABLE_NODE_LOG=yes` env:
-
-```bash
-$ ENABLE_NODE_LOG=yes NODE_LOG_DIR=/mylogdir/ alinode dispatch.js
-```
-
-> If you use `egg-scripts`, the env is already set for you.
-
-```bash
-$ egg-scripts start
-```
-
-## Questions & Suggestions
-
-Please open an issue [here](https://github.com/eggjs/egg/issues).
-
-## License
-
-[MIT](LICENSE)
