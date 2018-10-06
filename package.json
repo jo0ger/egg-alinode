@@ -1,13 +1,13 @@
 {
-  "name": "egg-alinode",
-  "version": "2.0.1",
-  "description": "alinode plugin for egg",
+  "name": "egg-alinode-async",
+  "version": "0.0.1",
+  "description": "async alinode plugin for egg",
   "eggPlugin": {
-    "name": "alinode"
+    "name": "alinode-async"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eggjs/egg-alinode.git"
+    "url": "https://github.com/jo0ger/egg-alinode-async.git"
   },
   "keywords": [
     "egg",
@@ -50,8 +50,9 @@
   },
   "files": [
     "config",
+    "lib",
     "app",
     "agent.js"
   ],
-  "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)"
+  "author": "Jooger <iamjooger@gmail.com> (https://jooger.me)"
 }
