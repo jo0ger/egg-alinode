@@ -26,7 +26,7 @@ $ npm i egg-alinode-async
 
 ``` js
 // config/plugin.js
-exports.alinode = {
+exports['alinode-async'] = {
   enable: true,
   package: 'egg-alinode-async'
 }
@@ -39,9 +39,11 @@ exports.alinode = {
 3. 通知agent启动alinode
 
 ``` js
-// app.js 在获取配置后
-app.messenger.sendToAgent('alinode', {
+// app.js 在获取配置后，利用IPC和agent通信
+app.messenger.sendToAgent('alinode-run', {
   appid: 'remote appid',
   secret: 'remote secret'
 })
 ```
+
+> 通信事件名为alinode-run，暂不支持自定义
