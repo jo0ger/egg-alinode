@@ -1,9 +1,12 @@
 'use strict';
 
-const start = require('./lib/alinode');
+const start = require('./lib/alinode')
 
 module.exports = agent => {
-  agent.messenger.on('alinode-run', asyncConfig => {
-    start(agent, asyncConfig);
-  });
+  const active = start(agent)
+  if (!active) {
+    agent.messenger.on('alinode-run', asyncConfig => {
+      start(agent, asyncConfig);
+    });
+  }
 };
