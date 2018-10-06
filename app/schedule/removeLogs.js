@@ -3,7 +3,7 @@
 const path = require('path');
 const fs = require('mz/fs');
 const moment = require('moment');
-const pkg = require('../package.json');
+const pkg = require('../../package.json');
 
 module.exports = app => {
   const exports = {};
